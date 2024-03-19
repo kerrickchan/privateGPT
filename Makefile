@@ -32,6 +32,12 @@ check:
 # Run
 ########################################################################################################################
 
+setup-ollama-pg:
+	poetry install --extras "llms-ollama ui vector-stores-postgres embeddings-ollama storage-nodestore-postgres"
+
+run-ollama:
+	ollama run mixtral
+
 run:
 	poetry run python -m private_gpt
 

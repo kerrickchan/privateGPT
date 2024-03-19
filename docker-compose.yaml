@@ -1,14 +1,22 @@
 services:
-  private-gpt:
-    build:
-      dockerfile: Dockerfile.local
-    volumes:
-      - ./local_data/:/home/worker/app/local_data
-      - ./models/:/home/worker/app/models
-    ports:
-      - 8001:8080
-    environment:
-      PORT: 8080
-      PGPT_PROFILES: docker
-      PGPT_MODE: local
+  # private-gpt:
+  #   build:
+  #     dockerfile: Dockerfile.local
+  #   volumes:
+  #     - ./local_data/:/home/worker/app/local_data
+  #     - ./models/:/home/worker/app/models
+  #   ports:
+  #     - 8001:8080
+  #   environment:
+  #     PORT: 8080
+  #     PGPT_PROFILES: docker
+  #     PGPT_MODE: local
+  pgvector:
+    extends:
+      file: ./docker-compose-pgvector.yml
+      service: pgvector
+    ports: 
+      - 5432:5432
 
+volumes:
+  pgvector_data:
